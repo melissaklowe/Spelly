@@ -5,60 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Spelly</title>
   <style>
-    :root {
-      --bg: #0b1020;
-      --card: #111731;
-      --accent: #7aa2ff;
-      --muted: #9fb2d3;
-      --good: #2ecc71;
-      --bad: #ff6b6b;
-      --warn: #f5a623;
-      --ink: #e9eefb;
+    :root{
+      --bg:#0b1020; --card:#111731; --accent:#7aa2ff; --muted:#9fb2d3;
+      --good:#2ecc71; --bad:#ff6b6b; --warn:#f5a623; --ink:#e9eefb;
     }
-    * { box-sizing: border-box; }
-    body {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      color: var(--ink);
-      background: radial-gradient(1200px 800px at 10% -10%, #1b2446 0%, var(--bg) 45%);
-    }
-    .wrap { max-width: 980px; margin: 32px auto; padding: 0 16px; }
-    header { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
-    .logo { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #6aa6ff, #a47cff);
-      display: grid; place-items: center; font-weight: 800; color: white; }
-    h1 { font-size: 28px; margin: 0; letter-spacing: 0.3px; }
-    .card { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px; box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
-    .grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
-    @media (max-width: 880px){ .grid { grid-template-columns: 1fr; } .big{font-size:32px;} button, .file{font-size:16px; padding:14px 16px;} }
-    @media (pointer: coarse){ button, .file{ min-height: 46px; } .kbd{ display:none; } }
-    button, .file { appearance: none; border: 1px solid rgba(255,255,255,0.12); background: #141b39; color: var(--ink);
-      padding: 10px 14px; border-radius: 12px; font-size: 14px; cursor: pointer; transition: transform 0.02s ease, background 0.2s ease; }
-    button:hover { background: #182148; }
-    button:active { transform: translateY(1px); }
-    button.primary { background: var(--accent); border-color: transparent; color: #0b1020; font-weight: 700; }
-    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); }
-    .score { display: flex; gap: 8px; align-items: center; }
-    .big { font-size: 40px; font-weight: 800; text-align: center; padding: 12px 0 0; }
-    .sub { text-align: center; color: var(--muted); margin-bottom: 4px; }
-    .status { margin-top: 8px; padding: 10px 12px; border-radius: 10px; font-weight: 600; }
-    .status.ok { background: rgba(46,204,113,0.15); color: #baf3cf; border: 1px solid rgba(46,204,113,0.35); }
-    .status.no { background: rgba(255,107,107,0.12); color: #ffd2d2; border: 1px solid rgba(255,107,107,0.35); }
-    .status.warn { background: rgba(245,166,35,0.12); color: #ffe8c5; border: 1px solid rgba(245,166,35,0.35); }
-    .list { max-height: 280px; overflow: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
-    .list table { width: 100%; border-collapse: collapse; }
-    .list th, .list td { padding: 8px 10px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .list tr:nth-child(odd) td { background: rgba(255,255,255,0.02); }
-    .hint { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: rgba(0,0,0,0.3);
-      padding: 6px 8px; border-radius: 8px; }
-    .small { font-size: 12px; }
-    .textarea { width: 100%; min-height: 120px; border-radius: 12px; padding: 10px; background: #0f1530;
-      color: var(--ink); border: 1px solid rgba(255,255,255,0.12); }
-    .footer { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink);
+      background:radial-gradient(1200px 800px at 10% -10%, #1b2446 0%, var(--bg) 45%);}
+    .wrap{max-width:980px;margin:32px auto;padding:0 16px}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+    .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#6aa6ff,#a47cff);
+      display:grid;place-items:center;font-weight:800;color:#fff}
+    h1{margin:0;font-size:28px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}.big{font-size:32px}button,.file{font-size:16px;padding:14px 16px}}
+    @media (pointer:coarse){button,.file{min-height:46px}.kbd{display:none}}
+    button,.file{appearance:none;border:1px solid rgba(255,255,255,.12);background:#141b39;color:var(--ink);
+      padding:10px 14px;border-radius:12px;font-size:14px;cursor:pointer;transition:transform .02s,background .2s}
+    button:hover{background:#182148} button:active{transform:translateY(1px)} .primary{background:var(--accent);border-color:transparent;color:#0b1020;font-weight:700}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+    .big{font-size:40px;font-weight:800;text-align:center;padding:12px 0 0}
+    .sub{text-align:center;color:var(--muted);margin-bottom:4px}
+    .status{margin-top:8px;padding:10px 12px;border-radius:10px;font-weight:600;display:none}
+    .ok{background:rgba(46,204,113,.15);color:#baf3cf;border:1px solid rgba(46,204,113,.35)}
+    .no{background:rgba(255,107,107,.12);color:#ffd2d2;border:1px solid rgba(255,107,107,.35)}
+    .warn{background:rgba(245,166,35,.12);color:#ffe8c5;border:1px solid rgba(245,166,35,.35)}
+    .list{max-height:280px;overflow:auto;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+    .list table{width:100%;border-collapse:collapse}
+    .list th,.list td{padding:8px 10px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .list tr:nth-child(odd) td{background:rgba(255,255,255,.02)}
+    .hint{font-family:ui-monospace,Consolas,Monaco,monospace;background:rgba(0,0,0,.3);padding:6px 8px;border-radius:8px}
+    .textarea{width:100%;min-height:120px;border-radius:12px;padding:10px;background:#0f1530;color:var(--ink);border:1px solid rgba(255,255,255,.12)}
+    .footer{margin-top:16px;color:var(--muted);font-size:12px;text-align:center}
   </style>
 </head>
 <body>
@@ -67,17 +48,17 @@
       <div class="logo">SY</div>
       <div>
         <h1>Spelly</h1>
-        <div class="small" style="color:#9fb2d3;">Voice-first spelling coach with PDF import and progress tracking</div>
+        <div class="small" style="color:#9fb2d3">Voice-first spelling coach with PDF import and progress tracking</div>
       </div>
     </header>
 
     <div class="grid">
       <section class="card">
-        <div class="row" style="justify-content: space-between;">
-          <div class="row" style="gap:12px; flex-wrap: wrap;">
-            <label class="file">Load PDF word list <input id="pdfFile" type="file" accept="application/pdf" style="display:none" /></label>
-            <button id="sampleBtn" class="ghost">Use sample list</button>
-            <button id="clearBtn" class="ghost">Clear list</button>
+        <div class="row" style="justify-content:space-between">
+          <div class="row" style="gap:12px;flex-wrap:wrap">
+            <label class="file">Load PDF word list <input id="pdfFile" type="file" accept="application/pdf" style="display:none"></label>
+            <button id="sampleBtn">Use sample list</button>
+            <button id="clearBtn">Clear list</button>
           </div>
           <div class="row">
             <button id="speakWordBtn">Say word</button>
@@ -87,21 +68,19 @@
         </div>
 
         <div class="big" id="currentWord">—</div>
-        <div class="sub small">
-          Tap <b>Say word</b> to hear it. Then press <b>Start listening</b> and let Eden spell it letter by letter.
-        </div>
+        <div class="sub small">Tap <b>Say word</b> to hear it. Then press <b>Start listening</b> and spell it letter by letter.</div>
 
-        <div id="statusBox" class="status warn" style="display:none"></div>
+        <div id="statusBox" class="status warn"></div>
 
-        <div class="row" style="justify-content:center; gap:10px; margin-top:8px;">
+        <div class="row" style="justify-content:center;gap:10px;margin-top:8px">
           <button id="checkBtn">Check now</button>
           <button id="repeatBtn">Repeat word</button>
           <button id="hintBtn">Give hint</button>
           <button id="skipBtn">Skip</button>
         </div>
 
-        <div style="margin-top:12px;">
-          <div class="row" style="gap:12px;">
+        <div style="margin-top:12px">
+          <div class="row" style="gap:12px">
             <div class="pill small">Heard: <span id="heardText" class="hint">—</span></div>
             <div class="pill small">Parsed letters: <span id="parsedLetters" class="hint">—</span></div>
             <div class="pill small">Target: <span id="targetText" class="hint">—</span></div>
@@ -109,25 +88,26 @@
           <textarea id="manualCorrection" class="textarea small" placeholder="Type letters if mic misunderstood (c a t)"></textarea>
         </div>
 
-        <div class="row" style="justify-content:space-between; margin-top:8px;">
-          <div class="score">
-            <span class="pill">⭐ Streak: <strong id="streak">0</strong></span>
-            <span class="pill">✅ Correct: <strong id="correct">0</strong></span>
-            <span class="pill">❌ Missed: <strong id="missed">0</strong></span>
-          </div>
+        <div class="row" style="justify-content:space-between;margin-top:8px">
+          <div class="pill">⭐ Streak: <strong id="streak">0</strong></div>
+          <div class="pill">✅ Correct: <strong id="correct">0</strong></div>
+          <div class="pill">❌ Missed: <strong id="missed">0</strong></div>
         </div>
       </section>
 
       <aside class="card">
         <h3>Word list</h3>
         <div class="list">
-          <table><thead><tr><th>#</th><th>Word</th><th>Status</th></tr></thead><tbody id="wordTable"></tbody></table>
+          <table>
+            <thead><tr><th style="width:48px">#</th><th>Word</th><th style="width:90px">Status</th></tr></thead>
+            <tbody id="wordTable"></tbody>
+          </table>
         </div>
-        <h3>Paste words (one per line)</h3>
+        <h3 style="margin-top:10px">Paste words (one per line)</h3>
         <textarea id="pasteArea" class="textarea" placeholder="cat\nwater\nbeautiful\n…"></textarea>
-        <div class="row" style="margin-top:8px;">
+        <div class="row" style="margin-top:8px">
           <button id="addPastedBtn">Add to list</button>
-          <button id="wipeProgressBtn" class="ghost">Reset progress</button>
+          <button id="wipeProgressBtn">Reset progress</button>
         </div>
       </aside>
     </div>
@@ -135,106 +115,198 @@
     <p class="footer">All progress is saved locally. Nothing leaves your browser.</p>
   </div>
 
+  <!-- PDF.js for PDF text extraction -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.9.155/pdf.min.js"></script>
+
   <script>
-    const byId = id => document.getElementById(id);
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
-    const pdfFile = byId('pdfFile');
-    const sampleBtn = byId('sampleBtn');
-    const clearBtn = byId('clearBtn');
-    const speakWordBtn = byId('speakWordBtn');
-    const startBtn = byId('startBtn');
-    const stopBtn = byId('stopBtn');
-    const checkBtn = byId('checkBtn');
-    const repeatBtn = byId('repeatBtn');
-    const hintBtn = byId('hintBtn');
-    const skipBtn = byId('skipBtn');
-    const wordTable = byId('wordTable');
-    const pasteArea = byId('pasteArea');
-    const addPastedBtn = byId('addPastedBtn');
-    const wipeProgressBtn = byId('wipeProgressBtn');
-    const currentWordEl = byId('currentWord');
-    const heardText = byId('heardText');
-    const parsedLetters = byId('parsedLetters');
-    const targetText = byId('targetText');
-    const manualCorrection = byId('manualCorrection');
-    const statusBox = byId('statusBox');
-    const streakEl = byId('streak');
-    const correctEl = byId('correct');
-    const missedEl = byId('missed');
+  // Helpers
+  const byId = id => document.getElementById(id);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const statusBox = byId('statusBox');
+  function showStatus(msg, kind='warn'){ statusBox.innerHTML = msg; statusBox.className = 'status '+kind; statusBox.style.display='block'; }
 
-    let words = JSON.parse(localStorage.getItem('spelly_words')||'[]');
-    let progress = JSON.parse(localStorage.getItem('spelly_progress')||'{}');
-    let order=[], idx=0, current=null, correct=0, missed=0, streak=0;
-    let wrongInRow=0, showWord=false;
+  // Elements
+  const pdfFile = byId('pdfFile'), sampleBtn = byId('sampleBtn'), clearBtn = byId('clearBtn');
+  const speakWordBtn = byId('speakWordBtn'), startBtn = byId('startBtn'), stopBtn = byId('stopBtn');
+  const checkBtn = byId('checkBtn'), repeatBtn = byId('repeatBtn'), hintBtn = byId('hintBtn'), skipBtn = byId('skipBtn');
+  const wordTable = byId('wordTable'), pasteArea = byId('pasteArea'), addPastedBtn = byId('addPastedBtn'), wipeProgressBtn = byId('wipeProgressBtn');
+  const currentWordEl = byId('currentWord'), heardText = byId('heardText'), parsedLetters = byId('parsedLetters'), targetText = byId('targetText'), manualCorrection = byId('manualCorrection');
+  const streakEl = byId('streak'), correctEl = byId('correct'), missedEl = byId('missed');
 
-    const synth = window.speechSynthesis;
-    const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recog = Rec ? new Rec() : null;
-    if (recog){ recog.continuous=false; recog.interimResults=false; recog.lang='en-US'; recog.maxAlternatives=5; }
+  // State
+  let words = JSON.parse(localStorage.getItem('spelly_words') || '[]');
+  let progress = JSON.parse(localStorage.getItem('spelly_progress') || '{}');
+  let order = [], idx = 0, current = null;
+  let correct = 0, missed = 0, streak = 0;
+  let wrongInRow = 0, showWord = false;
 
-    const HOMO=new Map([['a','a'],['ay','a'],['b','b'],['bee','b'],['c','c'],['see','c'],['sea','c'],['d','d'],['dee','d'],['e','e'],['ee','e'],['f','f'],['ef','f'],['g','g'],['gee','g'],['h','h'],['aitch','h'],['i','i'],['eye','i'],['j','j'],['jay','j'],['k','k'],['kay','k'],['l','l'],['el','l'],['m','m'],['em','m'],['n','n'],['en','n'],['o','o'],['oh','o'],['p','p'],['pee','p'],['q','q'],['cue','q'],['r','r'],['are','r'],['s','s'],['ess','s'],['t','t'],['tee','t'],['u','u'],['you','u'],['v','v'],['vee','v'],['w','w'],['doubleu','w'],['x','x'],['ex','x'],['y','y'],['why','y'],['z','z'],['zee','z'],['zed','z']]);
-    const MULT=new Map([['double',2],['triple',3]]);
-    const norm=t=>t.toLowerCase().replace(/[^a-z0-9-]/g,'');
-    const toksToLetters=t=>{const o=[];for(let i=0;i<t.length;i++){let k=norm(t[i]);if(!k)continue;if(MULT.has(k)){const n=MULT.get(k),nxt=norm(t[i+1]||''),l=HOMO.get(nxt)||nxt;if(l){for(let j=0;j<n;j++)o.push(l);i++;continue;}}const m=HOMO.get(k);if(m){o.push(m);continue;}if(k.length===1&&/[a-z]/.test(k))o.push(k);}return o;};
-    const parseTranscript=r=>{if(!r)return{letters:[],heard:''};const h=r.trim(),t=h.split(/\s+/);return{letters:toksToLetters(t),heard:h};};
-    const compare=(t,letters)=>{const clean=t.toLowerCase().replace(/[^a-z]/g,''),joined=letters.join('');return joined===clean;};
-    const say=t=>{if(!t)return;const u=new SpeechSynthesisUtterance(t);u.rate=0.95;synth.cancel();synth.speak(u);};
+  // Speech
+  const synth = window.speechSynthesis;
+  const say = t => { if(!t) return; const u = new SpeechSynthesisUtterance(t); u.rate = 0.95; synth.cancel(); synth.speak(u); };
 
-    function render(){wordTable.innerHTML=words.map((w,i)=>{const p=progress[w]||{correct:0,missed:0};const s=p.correct?'✅':p.missed?'⏳':'';return `<tr><td>${i+1}</td><td>${w}</td><td>${s}</td></tr>`}).join('');}
-    function save(){localStorage.setItem('spelly_words',JSON.stringify(words));localStorage.setItem('spelly_progress',JSON.stringify(progress));}
-    function next(){if(!order.length){order=[...words.keys()];for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}idx=0;}current=words[order[idx]];idx++;currentWordEl.textContent='—';targetText.textContent='—';heardText.textContent='—';parsedLetters.textContent='—';showWord=false;wrongInRow=0;}
-    function showStatus(msg,kind){statusBox.innerHTML=msg;statusBox.className='status '+kind;statusBox.style.display='block';}
+  // Recognition
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recog = Rec ? new Rec() : null;
+  if (recog){ recog.continuous = false; recog.interimResults = false; recog.lang = 'en-US'; recog.maxAlternatives = 5; }
 
-    async function listen(){
-      if(!recog){showStatus('Speech recognition not supported here. Use Chrome.','warn');return;}
-      heardText.textContent='...';parsedLetters.textContent='...';
-      const transcript=await new Promise((res,rej)=>{recog.onresult=e=>res(e.results[0][0].transcript);recog.onerror=e=>rej(e.error);recog.start();});
-      heardText.textContent=transcript.trim();
-      const p=parseTranscript(transcript);parsedLetters.textContent=p.letters.join(' ');
-    }
-
-    async function check(){
-      if(!current){showStatus('No word selected.','warn');return;}
-      const heard=heardText.textContent==='—'?'':heardText.textContent;
-      const parsed=parseTranscript(heard);
-      const ok=compare(current,parsed.letters);
-      if(ok){
-        correct++;streak++;wrongInRow=0;showWord=true;
-        progress[current]=(progress[current]||{correct:0,missed:0});progress[current].correct++;
-        showStatus('✅ Correct! '+current,'ok');say('Great job, '+current);
-        next();say(current);
-      }else{
-        wrongInRow++;missed++;streak=0;
-        progress[current]=(progress[current]||{correct:0,missed:0});progress[current].missed++;
-        if(wrongInRow>=3){showWord=true;showStatus('The correct spelling is <b>'+current+'</b>','warn');say('The correct spelling is '+current);}
-        else showStatus('Not quite. Try again.','no');
+  // Letter parsing
+  const HOMO = new Map([
+    ['a','a'],['ay','a'],['b','b'],['bee','b'],['c','c'],['see','c'],['sea','c'],
+    ['d','d'],['dee','d'],['e','e'],['ee','e'],['f','f'],['ef','f'],['g','g'],['gee','g'],
+    ['h','h'],['aitch','h'],['i','i'],['eye','i'],['j','j'],['jay','j'],['k','k'],['kay','k'],
+    ['l','l'],['el','l'],['m','m'],['em','m'],['n','n'],['en','n'],['o','o'],['oh','o'],
+    ['p','p'],['pee','p'],['q','q'],['cue','q'],['r','r'],['are','r'],['s','s'],['ess','s'],
+    ['t','t'],['tee','t'],['u','u'],['you','u'],['v','v'],['vee','v'],['w','w'],['doubleu','w'],
+    ['x','x'],['ex','x'],['y','y'],['why','y'],['z','z'],['zee','z'],['zed','z']
+  ]);
+  const MULT = new Map([['double',2],['triple',3]]);
+  const norm = t => t.toLowerCase().replace(/[^a-z0-9-]/g,'');
+  function toksToLetters(toks){
+    const out = [];
+    for(let i=0;i<toks.length;i++){
+      let t = norm(toks[i]); if(!t) continue;
+      if(MULT.has(t)){
+        const times = MULT.get(t);
+        const nxt = norm(toks[i+1]||'');
+        const letter = HOMO.get(nxt) || (nxt.length===1 ? nxt : '');
+        if(letter){ for(let k=0;k<times;k++) out.push(letter); i++; continue; }
       }
-      correctEl.textContent=correct;missedEl.textContent=missed;streakEl.textContent=streak;
-      targetText.textContent=showWord?current:'—';save();render();
+      const mapped = HOMO.get(t); if(mapped){ out.push(mapped); continue; }
+      if(t.length===1 && /[a-z]/.test(t)){ out.push(t); continue; }
     }
+    return out;
+  }
+  function parseTranscript(raw){
+    if(!raw) return {letters:[], heard:''};
+    const heard = raw.trim(), toks = heard.split(/\s+/);
+    return { letters: toksToLetters(toks), heard };
+  }
+  function compare(target, letters){
+    const clean = target.toLowerCase().replace(/[^a-z]/g,'');
+    return letters.join('') === clean;
+  }
 
-    pdfFile.onchange=async e=>{
-      const f=e.target.files[0];if(!f)return;
-      showStatus('Reading PDF...','warn');
-      const buf=await f.arrayBuffer(),pdf=await pdfjsLib.getDocument({data:buf}).promise;
-      let text='';for(let i=1;i<=pdf.numPages;i++){const p=await pdf.getPage(i);const c=await p.getTextContent();text+=' '+c.items.map(i=>i.str).join(' ');}
-      const arr=[...new Set(text.toLowerCase().split(/[^a-z]+/).filter(w=>w.length>1&&w.length<20))];
-      words=arr;order=[];next();render();showStatus('Loaded '+arr.length+' words.','ok');save();
-    };
-    sampleBtn.onclick=()=>{words=['family','teacher','friend','beautiful','because','animal','library','chocolate','early','school'];order=[];next();render();showStatus('Sample list ready.','ok');save();};
-    clearBtn.onclick=()=>{words=[];render();showStatus('List cleared.','warn');save();};
-    speakWordBtn.onclick=()=>{if(!current)next();say(current);};
-    repeatBtn.onclick=()=>say(current);
-    hintBtn.onclick=()=>{if(!current)return;const f=current[0];say('Hint: starts with '+f.toUpperCase());showStatus('Hint: '+f.toUpperCase(),'warn');};
-    skipBtn.onclick=()=>{next();say(current);};
-    startBtn.onclick=listen;
-    stopBtn.onclick=()=>{if(recog)try{recog.stop();}catch{}};
-    checkBtn.onclick=check;
-    addPastedBtn.onclick=()=>{const lines=pasteArea.value.split(/\n+/).map(v=>v.trim().toLowerCase()).filter(Boolean);for(const w of lines){if(/^[a-z]+$/.test(w)&&!words.includes(w))words.push(w);}pasteArea.value='';render();showStatus('Words added.','ok');save();};
-    wipeProgressBtn.onclick=()=>{progress={};correct=missed=streak=0;save();render();showStatus('Progress reset.','warn');};
+  // List helpers
+  function render(){
+    wordTable.innerHTML = words.map((w,i)=>{
+      const p = progress[w] || {correct:0, missed:0};
+      const s = p.correct ? '✅' : (p.missed ? '⏳' : '');
+      return `<tr><td>${i+1}</td><td>${w}</td><td>${s}</td></tr>`;
+    }).join('');
+  }
+  function save(){
+    localStorage.setItem('spelly_words', JSON.stringify(words));
+    localStorage.setItem('spelly_progress', JSON.stringify(progress));
+  }
+  function next(){
+    if(!order.length){
+      order = [...words.keys()];
+      for(let i=order.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [order[i],order[j]] = [order[j],order[i]]; }
+      idx = 0;
+    }
+    current = words[order[idx]]; idx++;
+    currentWordEl.textContent = '—';
+    targetText.textContent = '—';
+    heardText.textContent = '—';
+    parsedLetters.textContent = '—';
+    wrongInRow = 0; showWord = false;
+  }
 
-    render();if(words.length)next();
+  // Actions
+  async function listen(){
+    if(!recog){ showStatus('Speech recognition not supported in this Chrome. Try Chrome on desktop or Android.', 'warn'); return; }
+    heardText.textContent = '...'; parsedLetters.textContent = '...';
+    const transcript = await new Promise((resolve, reject)=>{
+      recog.onresult = e => resolve((e.results[0] && e.results[0][0] && e.results[0][0].transcript) || '');
+      recog.onerror = e => reject(e.error||e);
+      try { recog.start(); } catch(err){ reject(err); }
+    }).catch(err => { showStatus('Mic error: '+String(err), 'no'); return ''; });
+    if(!transcript) return;
+    heardText.textContent = transcript.trim();
+    const p = parseTranscript(transcript);
+    parsedLetters.textContent = p.letters.join(' ');
+  }
+
+  async function check(){
+    if(!current){ showStatus('No word selected yet. Load or add words, then tap Say word.', 'warn'); return; }
+    const manual = manualCorrection.value.trim();
+    let parsed;
+    if(manual){
+      const toks = manual.split(/\s+/);
+      parsed = { letters: toksToLetters(toks), heard: manual };
+    } else {
+      const heard = heardText.textContent === '—' ? '' : heardText.textContent;
+      parsed = parseTranscript(heard);
+    }
+    const ok = compare(current, parsed.letters);
+    if(ok){
+      correct++; streak++; wrongInRow = 0; showWord = true;
+      progress[current] = progress[current] || {correct:0, missed:0};
+      progress[current].correct++;
+      showStatus('✅ Correct!', 'ok'); say('Great job');
+      correctEl.textContent = correct; streakEl.textContent = streak;
+      targetText.textContent = current;
+      save(); render();
+      await sleep(700); next(); say(current);
+    } else {
+      wrongInRow++; missed++; streak = 0;
+      progress[current] = progress[current] || {correct:0, missed:0};
+      progress[current].missed++;
+      correctEl.textContent = correct; missedEl.textContent = missed; streakEl.textContent = streak;
+      if(wrongInRow >= 3){
+        showWord = true;
+        showStatus('The correct spelling is <b>'+current+'</b>', 'warn');
+        say('The correct spelling is '+current);
+        targetText.textContent = current;
+      } else {
+        showStatus('Not quite. Try again.', 'no'); say('Not quite. Try again.');
+      }
+      save(); render();
+    }
+  }
+
+  // PDF import
+  pdfFile.addEventListener('change', async (e)=>{
+    const file = e.target.files[0]; if(!file) return;
+    showStatus('Reading PDF...', 'warn');
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    let text = '';
+    for(let p=1;p<=pdf.numPages;p++){
+      const page = await pdf.getPage(p);
+      const content = await page.getTextContent();
+      text += ' ' + content.items.map(i => i.str).join(' ');
+    }
+    const arr = [...new Set(text.toLowerCase().split(/[^a-z]+/).filter(w => w.length>1 && w.length<20))];
+    words = arr; order = []; showStatus('Loaded '+arr.length+' words.', 'ok'); save(); render();
+    if(words.length){ next(); say(current); }
+  });
+
+  // Buttons
+  sampleBtn.onclick = () => { words = ['family','teacher','friend','beautiful','because','animal','library','chocolate','early','school']; order=[]; save(); render(); next(); showStatus('Sample list ready.','ok'); say(current); };
+  clearBtn.onclick = () => { words = []; order=[]; save(); render(); current=null; currentWordEl.textContent='—'; targetText.textContent='—'; showStatus('List cleared.','warn'); };
+  speakWordBtn.onclick = () => { if(!current){ if(!words.length){ showStatus('Load a list or add words first.', 'warn'); return; } next(); } say(current); };
+  repeatBtn.onclick = () => say(current);
+  hintBtn.onclick = () => { if(!current) return; const f = current[0]; say('Hint. It starts with '+f.toUpperCase()); showStatus('Hint: '+f.toUpperCase(), 'warn'); };
+  skipBtn.onclick = () => { if(!words.length){ showStatus('No words yet.', 'warn'); return; } next(); say(current); };
+  startBtn.onclick = listen;
+  stopBtn.onclick = () => { try{ recog && recog.stop(); } catch{} };
+  checkBtn.onclick = check;
+
+  addPastedBtn.onclick = () => {
+    const lines = pasteArea.value.split(/\n+/).map(v=>v.trim().toLowerCase()).filter(Boolean);
+    const seen = new Set(words); let added = 0;
+    for(const w of lines){ if(/^[a-z]+$/.test(w) && !seen.has(w)){ words.push(w); seen.add(w); added++; } }
+    pasteArea.value = ''; save(); render();
+    showStatus(added ? ('Added '+added+' words.') : 'No new words added.', added ? 'ok' : 'warn');
+    if(!current && words.length){ next(); say(current); }
+  };
+  wipeProgressBtn.onclick = () => { progress = {}; correct = 0; missed = 0; streak = 0; save(); render(); showStatus('Progress reset.', 'warn'); };
+
+  // Init
+  render();
+  if(words.length){ next(); }
+  else { showStatus('Load a PDF or paste words to get started.', 'warn'); }
   </script>
 </body>
 </html>
