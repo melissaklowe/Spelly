@@ -218,4 +218,23 @@
       const f=e.target.files[0];if(!f)return;
       showStatus('Reading PDF...','warn');
       const buf=await f.arrayBuffer(),pdf=await pdfjsLib.getDocument({data:buf}).promise;
-      let text='';for(let i=1;i<=pdf.numPages;i++){const p=await pdf.getPage(i);const c=await p
+      let text='';for(let i=1;i<=pdf.numPages;i++){const p=await pdf.getPage(i);const c=await p.getTextContent();text+=' '+c.items.map(i=>i.str).join(' ');}
+      const arr=[...new Set(text.toLowerCase().split(/[^a-z]+/).filter(w=>w.length>1&&w.length<20))];
+      words=arr;order=[];next();render();showStatus('Loaded '+arr.length+' words.','ok');save();
+    };
+    sampleBtn.onclick=()=>{words=['family','teacher','friend','beautiful','because','animal','library','chocolate','early','school'];order=[];next();render();showStatus('Sample list ready.','ok');save();};
+    clearBtn.onclick=()=>{words=[];render();showStatus('List cleared.','warn');save();};
+    speakWordBtn.onclick=()=>{if(!current)next();say(current);};
+    repeatBtn.onclick=()=>say(current);
+    hintBtn.onclick=()=>{if(!current)return;const f=current[0];say('Hint: starts with '+f.toUpperCase());showStatus('Hint: '+f.toUpperCase(),'warn');};
+    skipBtn.onclick=()=>{next();say(current);};
+    startBtn.onclick=listen;
+    stopBtn.onclick=()=>{if(recog)try{recog.stop();}catch{}};
+    checkBtn.onclick=check;
+    addPastedBtn.onclick=()=>{const lines=pasteArea.value.split(/\n+/).map(v=>v.trim().toLowerCase()).filter(Boolean);for(const w of lines){if(/^[a-z]+$/.test(w)&&!words.includes(w))words.push(w);}pasteArea.value='';render();showStatus('Words added.','ok');save();};
+    wipeProgressBtn.onclick=()=>{progress={};correct=missed=streak=0;save();render();showStatus('Progress reset.','warn');};
+
+    render();if(words.length)next();
+  </script>
+</body>
+</html>
